@@ -9,7 +9,7 @@
 <body>
 	<h1>Welcome ${loginuser.name} The department is ${loginuser.dept.name} Choose Your Action:</h1>
 	<a href="${pageContext.request.contextPath}/employee.do?flag=addEmployeeUi">Add     Employee</a></br>
-	<a href="#">Show    Employee</a></br>
+	<a href="${pageContext.request.contextPath}/employee.do?flag=displayEmployee">Show    Employee</a></br>
 	<a href="#">Update  Employee</a></br>
 	<a href="#">Delete  Employee</a></br>
 	<a href="#">Exit    System</a>

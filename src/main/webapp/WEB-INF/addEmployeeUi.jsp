@@ -14,8 +14,10 @@
  		<tr><td>email</td><td><input type="text" name="email"/></td></tr>
  		<tr><td>grade</td><td><input type="text" name="grade"/></td></tr>
  		<tr><td>password</td><td><input type="text" name="pwd"/></td></tr>
+ 		<tr><td>salary</td><td><input type="text" name="salary"/></td></tr>
  		<tr><td>department</td>
  		<td>
+ 		<!-- here the dept shall be got from database later -->
  		<select name="departmentId">
  			<option value="1">finance</option>
  			<option value="2">hr</option>

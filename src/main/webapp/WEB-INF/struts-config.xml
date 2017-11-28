@@ -18,9 +18,16 @@
 		<!-- config employeeAction -->
 		<action path="/employee" parameter="flag" name="employeeForm" >
 			<forward name="goAddEmployeeUi" path="/WEB-INF/addEmployeeUi.jsp" />
+			<forward name="goDisplayEmployeeUi" path="/WEB-INF/displayEmployeeUi.jsp" />
 		</action>
 		
 	</action-mappings>
+	
+	<!-- config global jump -->
+	<global-forwards>
+		<forward name="operationok" path="/WEB-INF/ok.jsp" />
+		<forward name="operationerror" path="/WEB-INF/err.jsp" />
+	</global-forwards>
 	
 	<!-- config DelegatingRequestProcessor to be used to  -->
 	<controller>

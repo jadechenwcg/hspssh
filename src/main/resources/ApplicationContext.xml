@@ -82,5 +82,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 <!-- config by annotaion or other-->
 <bean name="/employee" scope="prototype" class="com.hsp.web.action.EmployeeAction">
+		<property name="departmentService" ref="departmentService"/>
+		<property name="employeeService" ref="employeeService"/>
 </bean>
 </beans>

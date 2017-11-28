@@ -1,5 +1,7 @@
 package com.hsp.service.imp;
 
+import java.io.Serializable;
+
 import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
@@ -24,6 +26,11 @@ public class DepartmentService implements DepartmentServiceInter {
 
 		sessionFactory.getCurrentSession().save(d);
 		
+	}
+
+	@Override
+	public Department getDepartmentById(Serializable id) {
+		return (Department)sessionFactory.getCurrentSession().get(Department.class, id);
 	}
 
 }
