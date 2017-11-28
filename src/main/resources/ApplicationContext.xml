@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean id="testService" class="com.hsp.test.TestService">
+		<property name="name" value="Test Now" />
+	</bean>
+
+	<!-- config dataSource -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/hibernate4" />
+		<property name="username" value="root" />
+		<property name="password" value="root1234" />
+		<property name="initialSize" value="3" />
+		<property name="maxActive" value="500" />
+		<property name="maxIdle" value="2" />
+		<property name="minIdle" value="1" />
+	</bean>
+
+	<!-- config sessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>com/hsp/domain/Employee.hbm.xml</value>
+				<value>com/hsp/domain/Department.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.MySQLDialect
+				hibernate.hbm2ddl.auto=update
+				hibernate.show_sql=true
+				hibernate.format_sql=false
+				hibernate.cache.use_second_level_cache=true
+				hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
+				hibernate.generate_statistics=true
+			</value>
+		</property>
+	</bean>
+	
+	
+<!-- 	<bean id="employeeService" class="com.hsp.service.imp.EmployeeService">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean> -->
+	
+	<!-- launch annotation scan -->
+	<context:annotation-config />
+	<!-- use annotation to config  employeeService to add attributes-->
+	<bean id="employeeService" class="com.hsp.service.imp.EmployeeService">
+	</bean>
+	
+	<!-- config TransactionManager to manage sessionFactory -->
+	<bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- launch transaction annotation -->
+	<tx:annotation-driven transaction-manager="txManager" />
+	
+	
+<!-- config action the name is the same as the path in struts-config.xml <action-mappings> action's path-->
+<!-- <bean name="/login" scope="prototype" class="com.hsp.web.action.LoginAction">
+	<property name="imployeeServiceInter" ref="employeeService" />
+</bean> -->
+
+<!-- config by annotaion -->
+<bean name="/login" scope="prototype" class="com.hsp.web.action.LoginAction">
+</bean>
+
+<bean id="departmentService" class="com.hsp.service.imp.DepartmentService">
+	<property name="sessionFactory" ref="sessionFactory"/>
+</bean>
+
+<!-- config by annotaion or other-->
+<bean name="/employee" scope="prototype" class="com.hsp.web.action.EmployeeAction">
+</bean>
+</beans>
