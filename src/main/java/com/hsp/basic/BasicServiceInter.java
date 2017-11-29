@@ -23,4 +23,10 @@ public interface BasicServiceInter {
 	//7. get page count from hql
 	//get total pages
 	public int queryPageCount(String hql, Object[] parameters, int pageSize);
+	
+	//8. delete by id
+	public void deletById(Class clazz, java.io.Serializable id);
+	
+	//9. update by obj
+	public void update(Object obj);
 }

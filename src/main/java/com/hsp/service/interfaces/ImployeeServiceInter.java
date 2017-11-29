@@ -12,4 +12,6 @@ public interface ImployeeServiceInter extends BasicServiceInter {
 	public Employee checkEmployee(Employee e);
 	
 	public int getPageCount(int pageSize);
+	
+	
 }

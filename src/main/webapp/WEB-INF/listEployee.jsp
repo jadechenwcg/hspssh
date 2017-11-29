@@ -5,14 +5,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Users List</title>
+<!-- <script type="text/javascript" language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" language="javascript">
+$(document).ready(fucntion() {
+	window.alert("ok");
+
+})
+
+</script> -->
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+//             window.alert("happy");
+// test
+
+//class = deleteId binding
+	$(".deleteId").click(function(){
+		return window.confirm("Are you sure to delete this user? ");
+	})
+
+        });
+    </script>
 </head>
 <body>
- <h1>Go though List Employye Ui</h1>
+ <h1>Users List</h1>
  <table>
  <tr><td>id</td><td>name</td><td>email</td><td>grade</td><td>salary</td><td>edit</td><td>reset</td></tr>
  <c:forEach items="${emplist}" var="emp" >
- 	<tr><td>${emp.id}</td><td>${emp.name}</td><td>${emp.email}</td><td>${emp.grade}</td><td>${emp.salary}</td><td><a href="#">edit</a></td><td><a href="#">reset</a></td></tr>
+ 	<tr><td>${emp.id}</td><td>${emp.name}</td><td>${emp.email}</td><td>${emp.grade}</td><td>${emp.salary}</td><td><a href="${pageContext.request.contextPath}/employee.do?flag=goUpdateEmployeeUi&id=${emp.id}">edit</a></td><td><a class="deleteId" href="${pageContext.request.contextPath}/employee.do?flag=deleteEmployee&id=${emp.id}">delete</a></td></tr>
  </c:forEach>
  </table>
  

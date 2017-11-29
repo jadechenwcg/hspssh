@@ -24,6 +24,7 @@
 		<action path="/employee" parameter="flag" name="employeeForm" >
 			<forward name="goAddEmployeeUi" path="/WEB-INF/addEmployeeUi.jsp" />
 			<forward name="goListEmp" path="/WEB-INF/listEployee.jsp" />
+			<forward name="goUpdateEmployeeUi" path="/WEB-INF/updateEmployeeUi.jsp" /> <!-- goUpdateEmployeeUi -->
 		</action>
 		
 	</action-mappings>

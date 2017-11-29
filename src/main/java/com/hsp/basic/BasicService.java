@@ -12,9 +12,12 @@ import java.util.List;
 
 
 
+
+
 import javax.annotation.Resource;
 
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -100,4 +103,15 @@ public abstract class BasicService implements BasicServiceInter {
 		
 		return (rowCount -1) /pageSize + 1;
 	}
+	
+	public void deletById(Class clazz, java.io.Serializable id){
+		Session session = this.sessionFactory.getCurrentSession();
+		session.delete(this.findById(clazz,id));
+	}
+	
+	@Override
+	public void update(Object obj){
+		this.sessionFactory.getCurrentSession().update(obj);
+	}
+	
 }

@@ -62,4 +62,16 @@ public class LoginAction extends DispatchAction {
 		return super.execute(mapping, form, request, response);
 	}
 */
+	
+	// go back to home
+	public ActionForward goHome(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+//verify person
+		if (request.getSession().getAttribute("loginuser") != null){
+			return mapping.findForward("ok");
+		} else {
+			return mapping.findForward("err");
+		}
+		
+		
+	}
 }

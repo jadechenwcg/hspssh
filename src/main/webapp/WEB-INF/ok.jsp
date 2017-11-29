@@ -9,6 +9,6 @@
 <body>
 	<h1>Congrats!</h1>
 	<a href="#">return to add </a>
-	<a href="#">return to home page</a>
+	<a href="${pageContext.request.contextPath}/login.do?flag=goHome">return to home page</a>
 </body>
 </html>

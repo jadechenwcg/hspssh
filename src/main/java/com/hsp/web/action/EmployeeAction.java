@@ -97,4 +97,61 @@ public class EmployeeAction extends DispatchAction {
 			
 			
 		}
+		
+		// deleteEmployee
+		public ActionForward deleteEmployee(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			// get the id o fthe emp
+			String id = request.getParameter("id");
+			try {
+				employeeService.deletById(Employee.class, Integer.parseInt(id));
+			} catch (Exception e){
+				e.printStackTrace();
+				return mapping.findForward("operationerror");
+			}
+			
+			System.out.println("The deleted emp id = " + id);
+			
+			return mapping.findForward("operationok");
+		}
+		
+		//goUpdateEmployeeUi
+		public ActionForward goUpdateEmployeeUi(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			// get the id o fthe emp
+			String id = request.getParameter("id");
+			Employee e= (Employee) employeeService.findById(Employee.class, Integer.parseInt(id));
+			
+			// show the uer info in next page
+			request.setAttribute("emp", e);
+			
+			return mapping.findForward("goUpdateEmployeeUi");	
+			
+		}
+		
+		//update emp
+		public ActionForward updateEmployee(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			// get form
+			EmployeeForm employyeForm = (EmployeeForm) form;
+			//employyeForm to a domain obj
+			Employee e = new Employee();
+			e.setId(Integer.parseInt(employyeForm.getId()));
+			e.setName(employyeForm.getName());
+			e.setEmail(employyeForm.getEmail());
+			e.setGrade(Integer.parseInt(employyeForm.getGrade()));
+			e.setPwd(employyeForm.getPwd());
+			e.setSalary(Float.parseFloat(employyeForm.getSalary()));
+			e.setDept((Department)departmentService.findById(Department.class, Integer.parseInt(employyeForm.getDepartmentId())));
+			
+			try {
+				employeeService.update(e);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				return mapping.findForward("operationerror");
+			}
+			
+			
+			return mapping.findForward("operationok");
+
+		}
+		
+		
 }
