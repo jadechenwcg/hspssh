@@ -1,12 +1,15 @@
 package com.hsp.service.interfaces;
 
+import java.util.List;
+
+import com.hsp.basic.BasicServiceInter;
 import com.hsp.domain.Employee;
 
-public interface ImployeeServiceInter {
-	public void addEmployee(Employee e);
-	public void showEmployee();
-	public void updateEmployee(Employee e);
-	public void deleteEmployee(java.io.Serializable id);
+public interface ImployeeServiceInter extends BasicServiceInter {
 	
+	public List showEmployeeList(int pagenow, int pagesize);
+
 	public Employee checkEmployee(Employee e);
+	
+	public int getPageCount(int pageSize);
 }

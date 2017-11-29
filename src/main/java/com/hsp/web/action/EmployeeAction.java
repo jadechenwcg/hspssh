@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import com.hsp.domain.Department;
 import com.hsp.domain.Employee;
 import com.hsp.service.interfaces.DepartmentServiceInter;
 import com.hsp.service.interfaces.ImployeeServiceInter;
@@ -66,10 +68,11 @@ public class EmployeeAction extends DispatchAction {
 		e.setSalary(Float.parseFloat(employeeForm.getSalary()));
 		//which department
 		
-		e.setDept(departmentService.getDepartmentById(Integer.parseInt(employeeForm.getDepartmentId())));
+		//e.setDept(departmentService.getDepartmentById(Integer.parseInt(employeeForm.getDepartmentId())));
+		e.setDept((Department)departmentService.findById(Department.class, Integer.parseInt(employeeForm.getId())));
 		// save the Employee
 		try {
-			employeeService.addEmployee(e);
+			employeeService.add(e);
 		} catch (Exception e1) {
 			return mapping.findForward("operationerror");
 		}
@@ -80,15 +83,17 @@ public class EmployeeAction extends DispatchAction {
 	
 	// display employee
 	
-		public ActionForward displayEmployee(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
-			//test if data can get
-			System.out.println("***inside displayEmployee *");
-			EmployeeForm employeeForm = (EmployeeForm) form;
-			System.out.println("The employee is is ***" + employeeForm.getName());
-			//return null;
-
-				request.getSession().setAttribute("displayEmployee", employeeForm);
-				return mapping.findForward("goDisplayEmployeeUi");
+		public ActionForward goListEmp(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			
+			String s_pageNow = request.getParameter("pageNow");
+			int pageNow = 1;
+			if (s_pageNow != null) {
+				pageNow=Integer.parseInt(s_pageNow);
+			}
+			request.setAttribute("emplist", employeeService.showEmployeeList(pageNow, 3));
+			int pageCount = employeeService.getPageCount(3);
+			request.setAttribute("pageCount", pageCount);
+				return mapping.findForward("goListEmp");
 			
 			
 		}

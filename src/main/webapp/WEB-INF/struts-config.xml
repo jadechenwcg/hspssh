@@ -8,6 +8,11 @@
 	<form-beans>
 		<form-bean name="employeeForm" type="com.hsp.web.forms.EmployeeForm" />
 	</form-beans>
+	<!-- config global jump -->
+	<global-forwards>
+		<forward name="operationok" path="/WEB-INF/ok.jsp" />
+		<forward name="operationerror" path="/WEB-INF/err.jsp" />
+	</global-forwards>
 	<action-mappings>
 		<!-- delete type="com.hsp.web.action.LoginAction" after config action bean in the ApplicationContext.xml -->
 		<action path="/login" parameter="flag"  name="employeeForm">
@@ -18,16 +23,12 @@
 		<!-- config employeeAction -->
 		<action path="/employee" parameter="flag" name="employeeForm" >
 			<forward name="goAddEmployeeUi" path="/WEB-INF/addEmployeeUi.jsp" />
-			<forward name="goDisplayEmployeeUi" path="/WEB-INF/displayEmployeeUi.jsp" />
+			<forward name="goListEmp" path="/WEB-INF/listEployee.jsp" />
 		</action>
 		
 	</action-mappings>
 	
-	<!-- config global jump -->
-	<global-forwards>
-		<forward name="operationok" path="/WEB-INF/ok.jsp" />
-		<forward name="operationerror" path="/WEB-INF/err.jsp" />
-	</global-forwards>
+	
 	
 	<!-- config DelegatingRequestProcessor to be used to  -->
 	<controller>

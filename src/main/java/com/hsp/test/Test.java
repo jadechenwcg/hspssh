@@ -17,7 +17,7 @@ import com.hsp.service.interfaces.ImployeeServiceInter;
 
 public class Test {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 		DepartmentServiceInter ds= (DepartmentServiceInter) ac.getBean("departmentService");
 		
@@ -44,6 +44,6 @@ public class Test {
 		
 		// add department
 		ds.addDepartment(d);
-	}
+	}*/
 
 }
